@@ -120,7 +120,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .input__field:focus + .input__label,
-.input .input__label {
+.input--filled .input__label {
 	-webkit-animation: anim-input-1 .25s forwards;
 	animation: anim-input-1 .25s forwards;
 }
