@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="src/styles/css/normalize.css"/>
+	<link rel="stylesheet" href="src/styles/css/fonts.css"/>
+	<link rel="stylesheet" href="src/styles/css/main.css"/>
+	<link rel="stylesheet" href="src/styles/css/blocks/task-list.css"/>
+	<link rel="stylesheet" href="src/styles/css/components/inputs.css"/>
+	<link rel="stylesheet" href="src/styles/css/components/buttons.css"/>
+	<title>Angular ES6 Timetracker</title>
+</head>
+
+<body ng-app="timeTracker">
+<div class="container">
+	<header class="header">
+		<h1>Angular ES6 Timetracker</h1>
+	</header>
+	<div ui-view="addTask"></div>
+	<div ui-view="listTask"></div>
+</div>
+
+
+<script src="./dist/app.js"></script>
+<script src="./vendor/angular-locale_ru-ru.js"></script>
+
+</body>
+</html>

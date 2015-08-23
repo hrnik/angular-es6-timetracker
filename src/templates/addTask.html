@@ -1,0 +1,33 @@
+<section class="content content--gray">
+	<h2 class="content__title" ng-if="taskCtrl.task.status === 'begin'">Сейчас вы не работаете и ничего не зарабатываете</h2>
+
+	<h2 class="content__title" ng-if="taskCtrl.task.status === 'run'">Вы работаете уже {{taskCtrl.task.time | time }} и
+		<span ng-if="!taskCtrl.task.rate">ничего не </span> заработали
+		<span ng-if="taskCtrl.task.rate">уже {{taskCtrl.task.getPrice() | currency}}</span>
+	</h2>
+
+	<div class="input input--description">
+		<input class="input__field" id="input-description" type="text"  ng-model="taskCtrl.task.description"  input-focus-class>
+		<label class="input__label" for="input-description">
+			<span class="input__label-content" data-content="Описание задачи">Описание задачи</span>
+		</label>
+	</div>
+
+	<div class="input input--rate">
+		<input class="input__field" id="input-rate" type="number"  ng-model="taskCtrl.task.rate"  input-focus-class>
+		<label class="input__label" for="input-rate">
+			<span class="input__label-content" data-content="Ставка">Ставка</span>
+		</label>
+	</div>
+
+	<div class="button--wrapper" ng-if="taskCtrl.task.status === 'begin'">
+		<button ng-click="taskCtrl.start()" class="button">Старт
+		</button>
+	</div>
+
+	<div class="button--wrapper" ng-if="taskCtrl.task.status === 'run'">
+		<button ng-click="taskCtrl.stop()" class="button">Стоп
+		</button>
+	</div>
+
+</section>

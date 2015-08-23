@@ -1,0 +1,15 @@
+<section class="content">
+	<p ng-if="taskListCtrl.tasks.length">Всего вы заработали - <b>{{ taskListCtrl.getAllPrice() | currency}}</b> за <b>{{ taskListCtrl.getAllTime() |time}}</b></p>
+	<ul class="task-list" ng-if="taskListCtrl.tasks.length">
+		<li class="task-list__item" ng-repeat="task in taskListCtrl.tasks | reverse">
+			<div class="task-list__item__property task-list__item__property--description">{{task.description}}</div>
+			<div class="task-list__item__property task-list__item__property--time">{{task.time | time}}</div>
+			<div class="task-list__item__property task-list__item__property--price">{{task.getPrice() | currency}}</div>
+			<div class="task-list__item__property task-list__item__property--delete">
+				<button ng-click="taskListCtrl.removeTask(task)" class="button">Удалить
+				</button>
+			</div>
+		</li>
+	</ul>
+	<p ng-if="!taskListCtrl.tasks.length">Нет задач, давайте уже поработаем :)</p>
+</section>

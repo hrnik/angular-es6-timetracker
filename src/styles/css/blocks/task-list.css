@@ -1,0 +1,65 @@
+.task-list {
+	display: table;
+
+	width: 100%;
+
+	list-style: none;
+
+	text-align: left;
+}
+
+.task-list__item {
+	display: table-row;
+}
+
+.task-list__item__property {
+	display: table-cell;
+	overflow: hidden;
+
+	padding: 10px;
+
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-ms-text-overflow: ellipsis;
+
+	border-bottom: solid 1px #c9c9c9;
+}
+
+.task-list__item__property--description {
+	max-width: 700px;
+}
+.task-list__item__property--time {
+	width: 200px;
+	max-width: 350px;
+}
+
+.task-list__item__property--price {
+	width: 100px;
+	max-width: 250px;
+}
+
+.task-list__item__property--delete{
+	width: 1em;
+
+	font-size: 60%;
+}
+
+.task-list__item.ng-move,
+.task-list__item.ng-enter,
+.task-list__item.ng-leave {
+	-webkit-transition: all linear .3s;
+	transition: all linear .3s;
+}
+
+.task-list__item.ng-leave.ng-leave-active,
+.task-list__item.ng-move,
+.task-list__item.ng-enter {
+	opacity: 0;
+}
+
+.task-list__item.ng-leave,
+.task-list__item.ng-move.ng-move-active,
+.task-list__item.ng-enter.ng-enter-active {
+	opacity: 1;
+}
+
