@@ -18,5 +18,8 @@
     "watchify": "^2.1.1"
   },
   "author": "hrnik",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
