@@ -5,65 +5,71 @@ var watchify = require('watchify');
 var babelify = require('babelify');
 var rimraf = require('rimraf');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var _ = require('lodash');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var uglify = require('gulp-uglify');
 
 var config = {
-  entryFile: './src/app.js',
-  outputDir: './dist/',
-  outputFile: 'app.js'
+	entryFile: './src/app.js',
+	outputDir: './dist/',
+	outputFile: 'app.js'
 };
 
 
-gulp.task('clean', function(cb){
-    rimraf(config.outputDir, cb);
+gulp.task('clean', function (cb) {
+	rimraf(config.outputDir, cb);
 });
 
 var bundler;
 function getBundler() {
-  if (!bundler) {
-    bundler = watchify(browserify(config.entryFile, _.extend({ debug: true }, watchify.args)));
-  }
-  return bundler;
+	if (!bundler) {
+		bundler = watchify(browserify(config.entryFile, _.extend({debug: true}, watchify.args)));
+	}
+	return bundler;
 };
 
 function bundle() {
-  return getBundler()
-    .transform(babelify)
-    .bundle()
-    .on('error', function(err) { console.log('Error: ' + err.message); })
-    .pipe(source(config.outputFile))
-    .pipe(gulp.dest(config.outputDir))
-    .pipe(reload({ stream: true }));
+	return getBundler()
+		.transform(babelify)
+		.bundle()
+		.on('error', function (err) {
+			console.log('Error: ' + err.message);
+		})
+		.pipe(source(config.outputFile))
+		.pipe(buffer())
+		.pipe(uglify())
+		.pipe(gulp.dest(config.outputDir))
+		.pipe(reload({stream: true}));
 }
 
-gulp.task('build-persistent', ['clean'], function() {
-  return bundle();
+gulp.task('build-persistent', ['clean'], function () {
+	return bundle();
 });
 
-gulp.task('build', ['build-persistent'], function() {
-  process.exit(0);
+gulp.task('build', ['build-persistent'], function () {
+	process.exit(0);
 });
 
-gulp.task('watch', ['build-persistent'], function() {
+gulp.task('watch', ['build-persistent'], function () {
 
-  browserSync({
-    server: {
-      baseDir: './'
-    }
-  });
+	browserSync({
+		server: {
+			baseDir: './'
+		}
+	});
 
-  getBundler().on('update', function() {
-    gulp.start('build-persistent')
-  });
+	getBundler().on('update', function () {
+		gulp.start('build-persistent')
+	});
 });
 
 
 gulp.task('serve', function () {
-  browserSync({
-    server: {
-      baseDir: './'
-    }
-  });
+	browserSync({
+		server: {
+			baseDir: './'
+		}
+	});
 });
